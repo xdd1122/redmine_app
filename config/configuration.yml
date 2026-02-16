@@ -1,0 +1,12 @@
+# ./config/configuration.yml
+default:
+  email_delivery:
+    delivery_method: :smtp
+    smtp_settings:
+      address: "<%= ENV['REDMINE_SMTP_HOST'] %>"
+      port: <%= ENV['REDMINE_SMTP_PORT'] %>
+      domain: "<%= ENV['REDMINE_SMTP_DOMAIN'] %>"
+      authentication: :login
+      user_name: "<%= ENV['REDMINE_SMTP_USERNAME'] %>"
+      password: "<%= ENV['REDMINE_SMTP_PASSWORD'] %>"
+      enable_starttls_auto: true

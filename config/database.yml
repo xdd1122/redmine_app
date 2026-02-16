@@ -1,0 +1,11 @@
+# config/database.yml
+production:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: <%= ENV['REDMINE_DB_DATABASE'] %>
+  pool: 5
+  username: <%= ENV['REDMINE_DB_USERNAME'] %>
+  password: <%= ENV['REDMINE_DB_PASSWORD'] %>
+  host: <%= ENV['REDMINE_DB_POSTGRES'] %>
+  port: 5432

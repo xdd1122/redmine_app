@@ -1,0 +1,25 @@
+# --- Secrets ---
+.env
+.env.production
+id_rsa
+id_rsa.pub
+
+# --- Runtime Data (The Database & Files) ---
+data/
+postgres/
+mysql/
+files/
+
+# --- Build Artifacts ---
+*.tar.gz
+*.log
+tmp/
+
+# --- Terraform State (If you moved it here) ---
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# --- OS Junk ---
+.DS_Store
