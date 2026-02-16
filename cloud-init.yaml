@@ -8,17 +8,17 @@ users:
       - ${public_key}
 
 runcmd:
-  # 1. Create Swap File (Still critical for t3.micro memory)
+  # 1. Create Swap File for Memory Management
   - fallocate -l 2G /swapfile
   - chmod 600 /swapfile
   - mkswap /swapfile
   - swapon /swapfile
   - echo '/swapfile none swap sw 0 0' >> /etc/fstab
 
-  # 2. Wait for Apt Lock to be released (Fixes the "Command not found" issue)
+  # 2. Wait for Apt Lock to be released
   - while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do echo "Waiting for apt lock..."; sleep 5; done
   
-  # 3. Force install Docker and Compose
+  # 3. Install Docker and Compose
   - apt-get update -y
   - apt-get install -y docker.io docker-compose-v2
   

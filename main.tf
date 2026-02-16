@@ -70,15 +70,14 @@ resource "aws_instance" "redmine_vm" {
     host        = self.public_ip
   }
 
-  # 0. CRITICAL: Create the folder first! 
-  # If we don't do this, the file upload will fail because the folder doesn't exist yet.
+  # Create folders for reliable uploads
   provisioner "remote-exec" {
     inline = [
       "mkdir -p /home/ubuntu/redmine"
     ]
   }
 
-  # 1. Upload Configuration Files (To the new folder)
+  # Upload Configuration Files
   provisioner "file" {
     source      = "docker-compose.yml"
     destination = "/home/ubuntu/redmine/docker-compose.yml"
@@ -89,37 +88,36 @@ resource "aws_instance" "redmine_vm" {
     destination = "/home/ubuntu/redmine/.env"
   }
 
-  # 2. Upload the Heavy Image (To the new folder)
+  # Upload the Image
   provisioner "file" {
     source      = "redmine-release.tar.gz"
     destination = "/home/ubuntu/redmine/redmine-release.tar.gz"
   }
 
-  # 3. Activate the Application
+  # Activate the Application
   provisioner "remote-exec" {
     inline = [
-      # Wait for cloud-init (Swap creation & Docker install) to finish
+      # Wait for cloud-init to finish
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 5; done",
       
-      # WAIT for Docker to actually exist and be responsive
+      # Wait for Docker
       "until docker info >/dev/null 2>&1; do echo 'Waiting for Docker service...'; sleep 5; done",
       
-      # Load the image (Updated path)
+      # Load the image
       "docker load < /home/ubuntu/redmine/redmine-release.tar.gz",
       
-      # CRITICAL: Enter the folder before running compose!
+      # Enter the folder before running compose
       "cd /home/ubuntu/redmine && docker compose up -d"
     ]
   }
 }
 
-# 5. Create a Static IP (Elastic IP)
+# Create a Static IP
 resource "aws_eip" "redmine_ip" {
   instance = aws_instance.redmine_vm.id
   domain   = "vpc"
 }
 
-# Update the output to show the static IP
 output "app_url" {
   value = "http://${aws_eip.redmine_ip.public_ip}:3000"
 }
