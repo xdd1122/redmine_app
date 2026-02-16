@@ -4,7 +4,9 @@ This project allows you to deploy a secure, production-ready Redmine application
 
 The **Development approach**:  We build the entire application (including plugins and dependencies), save it as a single file, and then upload it to the server. This makes the server very stable and easy to manage.
 
-There are two ways of setting up the environment, **[1. The AWS  - Cloud hosted way](#Step-1:-Connect-to-AWS)** and **[2. Locally via Multipass](#local-testing-multipass)**
+There are two ways of setting up the environment, 
+1. **[1. The AWS  - Cloud hosted way](#aws-setup)**
+2. **[2. Locally via Multipass](#local-setup)**
 
 ---
 
@@ -15,6 +17,8 @@ There are two ways of setting up the environment, **[1. The AWS  - Cloud hosted 
 4.  **Git**: To download this project.
 
 ---
+
+<div id="aws-setup"></div>
 
 ## 🔑 Step 1: Connect to AWS
 
@@ -174,6 +178,8 @@ terraform destroy
 ```
 
 ---
+
+<div id="local-setup"></div>
 
 ## 💻 Local Testing (Multipass)
 
