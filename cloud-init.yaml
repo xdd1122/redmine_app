@@ -1,0 +1,36 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: [docker]
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${public_key}
+
+runcmd:
+  # 1. Create Swap File (Still critical for t3.micro memory)
+  - fallocate -l 2G /swapfile
+  - chmod 600 /swapfile
+  - mkswap /swapfile
+  - swapon /swapfile
+  - echo '/swapfile none swap sw 0 0' >> /etc/fstab
+
+  # 2. Wait for Apt Lock to be released (Fixes the "Command not found" issue)
+  - while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do echo "Waiting for apt lock..."; sleep 5; done
+  
+  # 3. Force install Docker and Compose
+  - apt-get update -y
+  - apt-get install -y docker.io docker-compose-v2
+  
+  # 4. Ensure Docker starts and ubuntu user has access
+  - systemctl enable --now docker
+  - usermod -aG docker ubuntu
+  
+  # 5. Create App Directory
+  - mkdir -p /home/ubuntu/redmine/data/postgresql
+  - mkdir -p /home/ubuntu/redmine/data/files
+  - chown -R ubuntu:ubuntu /home/ubuntu/redmine
+  - chown -R 999:999 /home/ubuntu/redmine/data
+
+  # 6. Signal completion
+  - touch /var/lib/cloud/instance/boot-finished

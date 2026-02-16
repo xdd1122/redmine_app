@@ -1,6 +1,7 @@
 services:
   redmine:
-    build: 
+    image: redmine-custom:latest #if image exists, use it
+    build: #otherwise build it
       context: .
       args:
         REDMINE_VERSION: ${REDMINE_VERSION}
@@ -32,6 +33,7 @@ services:
   db:
     image: postgres:${POSTGRES_VERSION}
     container_name: redmine_db
+    user: "999:999"
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
