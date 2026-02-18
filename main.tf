@@ -56,6 +56,7 @@ resource "aws_instance" "redmine_vm" {
   instance_type = "t3.micro"
   key_name      = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.redmine_sg.id]
+  iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
   # Inject Public Key into cloud-init
   user_data = templatefile("cloud-init.yaml", {
@@ -120,4 +121,33 @@ resource "aws_eip" "redmine_ip" {
 
 output "app_url" {
   value = "http://${aws_eip.redmine_ip.public_ip}:3000"
+}
+
+# Backup to S3
+resource "aws_s3_bucket" "backup_bucket" {
+  bucket_prefix = "redmine-backups-"
+}
+
+resource "aws_iam_role" "s3_role" {
+  name = "redmine_backup_role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17", Statement = [{ Action = "sts:AssumeRole", Effect = "Allow", Principal = { Service = "ec2.amazonaws.com" } }]
+  })
+}
+
+resource "aws_iam_role_policy" "s3_access" {
+  name = "s3_access"
+  role = aws_iam_role.s3_role.id
+  policy = jsonencode({
+    Version = "2012-10-17", Statement = [{ Action = ["s3:PutObject", "s3:ListBucket"], Effect = "Allow", Resource = [aws_s3_bucket.backup_bucket.arn, "${aws_s3_bucket.backup_bucket.arn}/*"] }]
+  })
+}
+
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "redmine_profile"
+  role = aws_iam_role.s3_role.name
+}
+
+output "backup_bucket_name" {
+  value = aws_s3_bucket.backup_bucket.id
 }
