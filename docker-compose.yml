@@ -1,6 +1,6 @@
 services:
   redmine:
-    image: redmine-custom:latest #if image exists, use it
+    image: akozma056/redmine_app:latest #if image exists, use it
     build: #otherwise build it
       context: .
       args:
