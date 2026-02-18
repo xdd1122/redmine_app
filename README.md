@@ -61,7 +61,7 @@ Needed for secure remote connection to the server.
 
 1.  **Clone this repository:**
     ```bash
-    git clone [https://github.com/xdd1122/redmine_app.git](https://github.com/xdd1122/redmine_app.git)
+    git clone https://github.com/xdd1122/redmine_app.git
     cd redmine_app
     ```
 
@@ -116,8 +116,8 @@ Go to **Settings** > **Secrets and variables** > **Actions** and add:
 
 | Secret Name | Value |
 | :--- | :--- |
-| `DOCKERHUB_USERNAME` | Your Docker Hub Username |
-| `DOCKERHUB_TOKEN` | Your Docker Hub Access Token |
+| `DOCKER_USERNAME` | Your Docker Hub Username |
+| `DOCKER_TOKEN` | Your Docker Hub Access Token |
 | `SSH_HOST` | The AWS IP Address from Step 4 |
 | `SSH_USER` | `ubuntu` |
 | `SSH_KEY` | Content of your `~/.ssh/id_rsa` file |
