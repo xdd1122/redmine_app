@@ -57,7 +57,7 @@ services:
     build: akozma056/redmine_backup:latest
     container_name: backup_bot
     depends_on:
-      - redmine_db
+      - db
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
