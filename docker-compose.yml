@@ -54,7 +54,7 @@ services:
     restart: unless-stopped
 
   backup:
-    build: ./backup
+    build: akozma056/redmine_backup:latest
     container_name: backup_bot
     depends_on:
       - redmine_db

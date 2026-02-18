@@ -18,12 +18,19 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push redmine
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: akozma056/redmine_app:latest
+
+      - name: Build and push Backup Bot
+        uses: docker/build-push-action@v4
+        with:
+          context: ./backup
+          push: true
+          tags: akozma056/redmine_backup:latest
 
   deploy:
     needs: build
@@ -52,3 +59,4 @@ jobs:
             docker compose pull
             docker compose up -d
             docker image prune -f
+
