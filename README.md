@@ -2,11 +2,11 @@
 
 This project allows you to deploy a secure, production-ready Redmine application to Amazon Web Services (AWS) from scratch.
 
-The **Development approach**:  We build the entire application (including plugins and dependencies), save it as a single file, and then upload it to the server. This makes the server very stable and easy to manage.
+The **Development approach**: We build the entire application (including plugins and dependencies) via **GitHub Actions**, which automatically pushes the Docker image to the server. This ensures "Immutable Infrastructure"—the server runs exactly what you tested locally.
 
-There are two ways of setting up the environment, 
-1. **[1. The AWS  - Cloud hosted way](#aws-setup)**
-2. **[2. Locally via Multipass](#local-setup)**
+There are two ways of setting up the environment:
+1. **[The AWS - Cloud hosted way](#aws-setup)**
+2. **[Locally via Multipass](#local-setup)**
 
 ---
 
@@ -61,8 +61,8 @@ Needed for secure remote connection to the server.
 
 1.  **Clone this repository:**
     ```bash
-    git clone https://github.com/xdd1122/redmine_app.git
-    cd my-redmine-cloud
+    git clone [https://github.com/xdd1122/redmine_app.git](https://github.com/xdd1122/redmine_app.git)
+    cd redmine_app
     ```
 
 2.  **Create the Environment file:**
@@ -94,78 +94,62 @@ Needed for secure remote connection to the server.
 
 ---
 
-## 🏗️ Step 4: Building the Image
+## 🏗️ Step 4: Deploy Infrastructure (Terraform)
+*Only run this once to create the server.*
 
-We need to package the application into a single file to send to AWS.
-
-1.  **Build the Docker Image:**
-    (It may take 2-5 minutes.)
+1.  **Initialize & Apply:**
     ```bash
-    docker build -t redmine-custom:latest .
+    terraform init
+    terraform apply
     ```
+    *(Type `yes` when asked)*
 
-2.  **Save the Image to a File:**
-    ```bash
-    docker save -o redmine-release.tar.gz redmine-custom:latest
-    ```
+2.  **Get the IP:**
+    Terraform will output the server IP. You will need this for the next step.
 
 ---
 
-## 🚀 Step 5: Deploy to AWS
+## 🤖 Step 5: Configure GitHub Secrets
 
-Now we let Terraform do the heavy lifting.
+For the CI/CD pipeline to work, you must add these secrets to your GitHub Repository.
+Go to **Settings** > **Secrets and variables** > **Actions** and add:
 
-1.  **Initialize Terraform:**
+| Secret Name | Value |
+| :--- | :--- |
+| `DOCKERHUB_USERNAME` | Your Docker Hub Username |
+| `DOCKERHUB_TOKEN` | Your Docker Hub Access Token |
+| `SSH_HOST` | The AWS IP Address from Step 4 |
+| `SSH_USER` | `ubuntu` |
+| `SSH_KEY` | Content of your `~/.ssh/id_rsa` file |
+
+---
+
+## 🚀 CI/CD Pipeline (Automated Deployment)
+
+This project uses **GitHub Actions** for a fully automated DevOps pipeline. You do not need to manually build or copy Docker images.
+
+### How it works:
+1.  **Continuous Integration (CI):** When you push code to the `main` branch, GitHub Actions automatically builds the Docker image and pushes it to Docker Hub.
+2.  **Continuous Deployment (CD):** After a successful build, the pipeline logs into the AWS server via SSH, pulls the new image, and restarts the application with zero downtime.
+
+### 🔄 How to Update the App
+1.  Make changes to your code locally.
+2.  Commit and push:
     ```bash
-    terraform init
+    git add .
+    git commit -m "Added a cool new feature"
+    git push origin main
     ```
-
-2.  **Review the Plan:**
-    ```bash
-    terraform plan
-    ```
-
-3.  **Apply (Launch):**
-    ```bash
-    terraform apply
-    ```
-    * Type `yes` when asked.
-    * **Wait:** It will take roughly **5-8 minutes**. Terraform is creating the server, installing Docker on it, uploading your image and starting the app.
-
-4.  **Success:**
-    When finished, you will see a green message with your server's IP address:
-    ```text
-    Apply complete!
-    Outputs:
-    app_url = "http://10.10.10.10:3000"     #Example
-    ```
+3.  Wait ~3 minutes, and the changes will be live on your server.
 
 ---
 
 ## 🌐 Accessing Your App
 
-1.  Copy the `app_url` from the output and paste it into your browser.
+1.  Copy the `app_url` from the Terraform output and paste it into your browser.
 2.  **Default Login:**
     * **User:** `admin`
     * **Password:** `admin`
-
----
-
-## 🔄 How to Update
-
-If you add a new plugin or change a setting in `.env`:
-
-1.  **Rebuild locally:**
-    ```bash
-    docker build -t redmine-custom:latest .
-    docker save -o redmine-release.tar.gz redmine-custom:latest
-    ```
-
-2.  **Redeploy:**
-    Tell Terraform to recreate the VM while keeping the static IP and Security Groups intact to avoid noticeable service disruption.
-    ```bash
-    terraform apply -replace="aws_instance.redmine_vm"
-    ```
 
 ---
 
