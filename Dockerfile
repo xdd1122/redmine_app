@@ -11,7 +11,12 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 COPY config/configuration.yml /usr/src/redmine/config/configuration.yml
 COPY config/database.yml /usr/src/redmine/config/database.yml
 
-RUN apk add --no-cache postgresql-client
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    build-essential \
+    libxml2-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy plugins
 COPY plugins/ /usr/src/redmine/plugins/
