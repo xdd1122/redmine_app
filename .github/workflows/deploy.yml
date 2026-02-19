@@ -57,6 +57,6 @@ jobs:
           script: |
             cd /home/ubuntu/redmine
             docker compose pull
-            docker compose up -d
-            docker image prune -f
+            docker compose up -d --force-recreate
+            docker image prune -af
 
