@@ -15,7 +15,7 @@ COPY config/database.yml /usr/src/redmine/config/database.yml
 COPY plugins/ /usr/src/redmine/plugins/
 
 # Schema format for SLA plugin
-RUN echo "config.active_record.schema_format = :sql" >> config/application.rb
+RUN sed -i 's/class Application < Rails::Application/class Application < Rails::Application\n    config.active_record.schema_format = :sql/' config/application.rb
 
 # Install gems
 RUN apt-get update && apt-get install -y build-essential libxml2-dev && rm -rf /var/lib/apt/lists/*
