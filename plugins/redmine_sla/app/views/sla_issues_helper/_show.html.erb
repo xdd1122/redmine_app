@@ -1,0 +1,71 @@
+<% 
+if User.current.allowed_to?(:view_sla, @project, :global => true)
+
+  sla_cache = issue.get_sla_cache
+
+  if ( !sla_cache.nil? && sla_cache.sla_level_id > 0  )
+
+%>
+<hr />
+<div class="sla attribute">
+  
+  <div class="label"><%= l('sla_label.sla.plural') -%></div>
+
+  <div class="value">
+
+    <ul class="flex-container">
+      <li class="flex-item">&#9658;&nbsp;<%= link_to sla_cache.sla_level[:name], sla_level_path(sla_cache.sla_level),
+        title: l(:button_show)+" : "+l('sla_label.sla_level.singular') -%></li>
+      <li class="flex-item">&#9658;&nbsp;<%= link_to sla_cache.sla_level.sla_calendar[:name], sla_calendar_path(sla_cache.sla_level.sla_calendar),
+        title: l(:button_show)+" : "+l('sla_label.sla_calendar.singular') -%></li>
+    </ul>
+      <ul class="flex-container">      
+<%
+    SlaType.all.each { |sla_type| 
+
+      sla_term = issue.get_sla_term(sla_type.id)
+      # TODO : SlaLog : no sla_level
+      next if ( sla_term.nil? )
+
+      sla_spent = issue.get_sla_spent(sla_type.id)
+      # TODO : SlaLog : no sla_cache_term > no priority ?
+      next if ( sla_spent.nil? )
+        
+      if ( !sla_spent.nil? && !sla_term.nil? ) 
+
+        # TODO: to define the duration in hours of a day, you must fork this project : https://github.com/henrypoydar/chronic_duration/blob/master/lib/chronic_duration.rb 
+        sla_spent_txt = ChronicDuration.output(sla_spent*60, :format => :short, :limit_to_hours => true, :units => 2, :joiner => '', :keep_zero => true )
+        sla_term_txt = ChronicDuration.output(sla_term*60, :format => :short, :limit_to_hours => true, :units => 2, :joiner => '')
+
+        sla_percent = ( sla_spent * 100 / sla_term ).round()
+
+        sla_helper = Object.new.extend(SlaIssuesHelper)
+  -%>
+        <li class="flex-item">
+          <table>
+            <tr>
+              <td  style="vertical-align: middle" rowspan="2">
+                <%= sla_helper.sla_display sla_percent, issue.status.is_closed, Setting.plugin_redmine_sla["sla_display"] || 'bar' -%>
+              </td>
+              <td style="vertical-align: bottom">
+                <strong><%= sla_type.name -%></strong>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top">
+                <%= sla_spent_txt -%>&nbsp;/&nbsp;<%= sla_term_txt -%>
+              </td>
+            </tr>
+          </table>
+        </li>
+<%
+      end # if ( !sla_spent.nil? && !sla_term.nil? ) 
+    } # SlaTypes.all.each { |sla_type|
+%>
+    </ul>
+  </div>
+</div>
+<%
+  end # if ( !sla_level_id.nil? )
+end # if User.current.allowed_to?(:view_sla, @project, :global => true)
+%>

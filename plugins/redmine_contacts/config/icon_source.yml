@@ -1,0 +1,39 @@
+# This file is used by icons rake task to download SVG icons from Tabler
+# Keys description:
+#   - name: destination icon name
+#     svg: source icon name from Github repository
+#     style: outline (default) or filled
+- name: arrow-merge
+  svg: arrow-merge
+- name: bullet-go
+  svg: arrow-right-circle
+- name: deal
+  svg: target-arrow
+- name: person
+  svg: user
+- name: clock-red
+  svg: clock
+- name: phone
+  svg: phone
+- name: target
+  svg: target
+- name: company
+  svg: building
+- name: money
+  svg: coin
+- name: rosette
+  svg: award
+- name: calendar-view-day
+  svg: calendar
+- name: feed
+  svg: rss
+- name: vcard
+  svg: id
+- name: date
+  svg: calendar
+- name: meeting
+  svg: calendar-time
+- name: probability
+  svg: dice-3
+- name: issue-note
+  svg: message-plus

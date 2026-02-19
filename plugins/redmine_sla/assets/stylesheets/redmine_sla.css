@@ -1,0 +1,189 @@
+
+/*** display color indicator ***/
+.sla_display.good { --c:green; }
+.sla_display.warn { --c:orange; }
+.sla_display.fail { --c:red; }
+.sla_display.doneok { --c:darkgreen; }
+.sla_display.doneko { --c:darkred; }
+
+/*** Only display circle for pie and square for bar in mobile mode ***/
+@media screen and (max-width: 480px) {
+  .sla_display {
+    --c:green;
+    width: 20px;
+    height: 20px;
+    font-size: 0;
+    color: transparent;
+    background: var(--c);
+    display: inline-block;
+  }
+  .sla_bar {
+    border-radius: 15%;
+  }
+  .sla_pie {
+    border-radius: 50%;
+  }
+}
+
+/*** Progress bar ***/
+@media screen and (min-width: 481px) {
+
+  .sla_bar {
+    --p:50;
+    --c:darkgrey;
+    background: darkgrey;
+    color: transparent;    
+    font-size: 0;
+    border-radius: 5%;
+    height: 25px;
+    width: 125px;
+    position: relative;
+  }
+  .sla_bar::before,
+  .sla_bar::after {
+    content: '';
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 125px;
+    position: absolute;
+  }
+  .sla_bar:before {
+    content: attr(label);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: sans-serif;    
+    background-color: transparent;
+  }
+  .sla_bar:after {
+    width: calc(var(--p)*1%);
+    background: var(--c);
+    display: block;
+    border-radius: 5%;   
+  }
+
+  .sla_pie_modern {
+    --p:50;
+    --b:5px;
+    --w:50px;
+    --c:green;
+    width: var(--w);
+    aspect-ratio: 1;
+    position: relative;
+    display: inline-grid;
+    margin: 4px;
+    place-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+  .sla_pie_modern:before,
+  .sla_pie_modern:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+  .sla_pie_modern:before {
+    inset: 0;
+    background:
+      radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+      conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+            mask: radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+  }
+  .sla_pie_modern:after {
+    inset: calc(50% - var(--b)/2);
+    background: var(--c);
+    transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+  }
+  /*** Thanks for PieChart to https://www.freecodecamp.org/news/css-only-pie-chart/ ***/
+
+  .sla_pie_flat {
+    --p: 50;
+    --b: 8px;
+    --w: 40px;
+    --c: green;
+    --r: darkgrey;
+    width: var(--w);
+    height: var(--w);
+    margin: 1em auto;
+    border: var(--b) solid transparent;
+    border-radius: 50%;
+    background: linear-gradient(lightyellow, lightyellow) padding-box,
+    conic-gradient(var(--c) calc(var(--p)*1%), var(--r) calc(var(--p)*1%)) border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+  .sla_pie_flat p {
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+  }
+
+}
+
+/*** Sla Issue Helper View Responsive with Felxbox ***/
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: left;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.flex-item {
+  background: transparent;
+  padding: 2px;
+  margin: 2px;
+}
+/*** Thanks for Felxbox to https://css-tricks.com/snippets/css/a-guide-to-flexbox/ ***/
+
+/*** Administration ***/
+
+#admin-menu a.redmine-sla { background-image:url('../images/sla_16.png'); }
+
+.title-sla-settings h2 {
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  padding-left: 36px;
+  height: 32px;
+}
+
+.icon-sla { background-image:url('../images/sla_16.png'); }
+.title-sla h2 { background-image:url('../images/sla_32.png'); }
+.icon-sla_type { background-image:url('../images/sla_type_16.png'); }
+.title-sla_type h2 { background-image:url('../images/sla_type_32.png'); }
+.icon-sla_status { background-image:url('../images/sla_status_16.png'); }
+.title-sla_status h2 { background-image:url('../images/sla_status_32.png'); }
+.icon-sla_holiday { background-image:url('../images/sla_holiday_16.png'); }
+.title-sla_holiday h2 { background-image:url('../images/sla_holiday_32.png'); }
+.icon-sla_calendar { background-image:url('../images/sla_calendar_16.png'); }
+.title-sla_calendar h2 { background-image:url('../images/sla_calendar_32.png'); }
+.icon-sla_calendar_holiday { background-image:url('../images/sla_calendar_holiday_16.png'); }
+.title-sla_calendar_holiday h2 { background-image:url('../images/sla_calendar_holiday_32.png'); }
+.icon-sla_schedule { background-image:url('../images/sla_schedule_16.png'); }
+.title-sla_schedule h2 { background-image:url('../images/sla_schedule_32.png'); }
+.icon-sla_level { background-image:url('../images/sla_level_16.png'); }
+.title-sla_level h2 { background-image:url('../images/sla_level_32.png'); }
+.icon-sla_level_term { background-image:url('../images/sla_level_term_16.png'); }
+.title-sla_level_term h2 { background-image:url('../images/sla_level_term_32.png'); }
+.icon-sla_project_tracker { background-image:url('../images/sla_project_tracker_16.png'); }
+.title-sla_project_tracker h2 { background-image:url('../images/sla_project_tracker_32.png'); }
+.icon-sla_cache { background-image:url('../images/sla_cache_16.png'); }
+.title-sla_cache h2 { background-image:url('../images/sla_cache_32.png'); }
+.icon-sla_cache_spent { background-image:url('../images/sla_cache_spent_16.png'); }
+.title-sla_cache_spent h2 { background-image:url('../images/sla_cache_spent_32.png'); }
+
+.icon-sla_cache_refresh { background-image:url('../images/sla_cache_refresh_16.png'); }
+.icon-sla_cache_spent_refresh { background-image:url('../images/sla_cache_spent_refresh_16.png'); }
+
+.redmine_sla_footer { border-top: 1px solid#bbb; font-size: 0.9em; color: #aaa; padding: 5px; text-align:center;}

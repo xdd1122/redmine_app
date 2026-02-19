@@ -1,0 +1,31 @@
+<script type="text/javascript">
+  jQuery(function($) {
+    // Function to search for duplicates
+    var duplicates = function() {
+      var form = $("#contact_form"); // Form containing contact data
+      var url = '<%= escape_javascript(contacts_duplicates_duplicates_path(project_id: @project, contact_id: @contact).html_safe) %>'; // URL for the AJAX request
+      var formData = form.serialize(); // Serialize form data
+
+      // Perform the AJAX request
+      $.get(url, formData)
+        .done(function(data) {
+          $("#duplicates").html(data); // Update the duplicates section
+        })
+        .fail(function() {
+          console.error("Failed to fetch duplicates"); // Handle errors
+        });
+    };
+
+    // Fields to monitor for changes
+    var fields = ["#contact_first_name", "#contact_middle_name", "#contact_last_name"];
+
+    // Attach input event listener to each field
+    fields.forEach(function(field) {
+      $(document).on('input', field, function() {
+        // Debounce the duplicates function (e.g., 200ms delay)
+        clearTimeout($(this).data('timeout'));
+        $(this).data('timeout', setTimeout(duplicates, 200));
+      });
+    });
+  });
+</script>

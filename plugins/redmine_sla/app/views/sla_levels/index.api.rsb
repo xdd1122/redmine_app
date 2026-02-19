@@ -1,0 +1,11 @@
+api.array :sla_levels, api_meta(:total_count => @entity_count, :offset => @offset, :limit => @limit) do
+  @entities.each do |sla_level|
+    api.sla_level do
+      api.id sla_level.id
+      api.name sla_level.name
+      api.sla_id sla_level.sla_id
+      api.sla_calendar_id sla_level.sla_calendar_id
+      api.custom_field_id sla_level.custom_field_id
+    end
+  end
+end

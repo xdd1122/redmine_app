@@ -1,0 +1,16 @@
+<table id="saved-items" class="list">
+  <thead>
+  <tr>
+    <th>#</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <% saved_objects.each do |contact| %>
+  <tr>
+    <td id="contact-<%= contact.id %>"><%= link_to contact.id, contact_path(contact) %></td>
+
+  </tr>
+  <% end %>
+  </tbody>
+</table>

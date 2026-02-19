@@ -1,0 +1,633 @@
+# Korean strings for Rails i18n (Ki Won Kim, Jung Ji Yong)
+ko:
+  contacts_title: 연락처
+
+  label_crm_recently_viewed: 최근 본 항목
+  label_crm_gravatar_enabled: Gravatar 사용
+  label_crm_thumbnails_enabled: 노트에 이미지 썸네일 표시
+  label_crm_max_thumbnail_file_size: 썸네일 최대 이미지 크기
+  label_crm_view_all_contacts: 모든 연락처 보기
+  label_crm_background_info: 배경 정보
+  label_crm_company: 회사
+  label_contact_plural: 연락처
+  label_crm_contact_edit_information: 연락처 정보 수정
+  label_crm_edit_tags: 태그 편집
+  label_crm_contact_view: 보기
+  label_crm_contact_list: 목록
+  label_crm_contact_new: 새 연락처
+  label_crm_at_company: 소속
+  label_crm_last_notes: 최근 노트
+  label_crm_tags_plural: 태그
+  label_crm_multi_tags_plural: 여러 태그 선택
+  label_crm_single_tag_mode: 단일 태그
+  label_crm_multiple_tags_mode: 다중 태그
+  label_crm_contact_tag: 태그
+  label_crm_time_ago: 전
+  label_crm_add_note_plural: 노트 추가
+  label_crm_note_plural: 노트
+
+  label_crm_add_tags_rule: 쉼표(,)로 구분
+  label_crm_contact_search: 이름으로 검색
+  label_crm_note_for: 대상 노트
+  label_crm_show_on_map: 지도에서 보기
+  label_crm_add_another_phone: 전화번호 추가
+  label_crm_remove: 삭제
+  label_crm_related_contacts: 관련 연락처
+  label_crm_assigned_to: 담당자
+  label_crm_issue_added: 이슈가 추가되었습니다
+  label_crm_add_emails_rule: 이메일을 쉼표(,)로 구분
+  label_crm_add_phones_rule: 전화번호를 쉼표(,)로 구분
+  label_crm_add_employee: 새 직원 추가
+  label_crm_merge_duplicate_plural: 중복 병합
+  label_crm_duplicate_plural: 중복 가능성 있음
+  label_crm_duplicate_for_plural: 다음에 대한 중복 가능성
+  label_crm_add_tag: + 태그 추가
+
+  label_crm_note_show_extras: 고급 옵션 표시 (유형, 날짜, 파일)
+  label_crm_note_hide_extras: 고급 옵션 숨기기
+  label_crm_note_read_more: (더 보기)
+  label_crm_invoice_import: CSV에서 인보이스 가져오기
+
+  label_deal_plural: 거래
+  label_crm_contractor_plural: 연락처
+  label_deal: 거래
+  label_crm_deal_new: 새 거래
+  label_crm_deal_edit_information: 거래 정보 수정
+  label_crm_deal_change_status: 상태 변경
+  label_crm_statistics: 통계
+  label_crm_deals_import: CSV에서 거래 가져오기
+
+  label_crm_deal_status_first_contact: 첫 접촉
+  label_crm_deal_status_negotiations: 협상 중
+  label_crm_deal_status_pending: 보류
+  label_crm_deal_status_won: 수주
+  label_crm_deal_status_lost: 실패
+
+  label_crm_created_on: 생성일
+
+  field_note_date: 노트 날짜
+  field_background: 배경
+  field_currency: 통화
+  field_contact: 연락처
+
+  field_deal_name: 이름
+  field_deal_background: 배경
+  field_deal_contact: 연락처
+  field_deal_price: 금액
+  field_price: 금액
+
+  field_contact_avatar: 아바타
+  field_contact_is_company: 회사 여부
+  field_contact_name: 이름
+  field_contact_last_name: 성
+  field_contact_first_name: 이름
+  field_contact_middle_name: 가운데 이름
+  field_contact_job_title: 직책
+  field_contact_company: 회사
+  field_contact_address: 주소
+  field_contact_phone: 전화번호
+  field_contact_email: 이메일
+  field_contact_website: 웹사이트
+  field_contact_skype: Skype
+  field_contact_status: 상태
+  field_contact_background: 배경
+  field_contact_tag_names: 태그
+  field_first_name: 이름
+  field_last_name: 성
+  field_birthday: 생일
+  field_contact_department: 부서
+
+  field_company_field: 업종
+
+  field_color: 색상
+
+  button_add_note: 노트 추가
+  notice_successful_save: 성공적으로 저장되었습니다
+  notice_successful_add: 성공적으로 생성되었습니다
+  notice_unsuccessful_save: 저장 중 문제가 발생했습니다
+  notice_successful_merged: 성공적으로 병합되었습니다
+
+  notice_merged_warning: 이 사람에게 연결된 모든 노트, 프로젝트, 태그, 작업이 아래에서 선택한 연락처로 이동합니다. 이 연락처는 삭제됩니다.
+
+  project_module_contacts: 연락처
+
+  permission_view_contacts: 연락처 보기
+  permission_edit_contacts: 연락처 수정
+  permission_delete_contacts: 연락처 삭제
+  permission_view_deals: 거래 보기
+  permission_edit_deals: 거래 수정
+  permission_delete_deals: 거래 삭제
+  permission_add_notes: 노트 추가
+  permission_delete_notes: 노트 삭제
+  permission_delete_own_notes: 내 노트 삭제
+
+  # 2.0.0
+  label_crm_deal_category: 거래 분류
+  label_crm_deal_category_plural: 거래 분류
+  label_crm_deal_category_new: 새 거래 분류
+  text_deal_category_destroy_assignments: 분류 연결을 삭제
+  text_deal_category_destroy_question: "이 분류에 연결된 거래가 %{count}건 있습니다. 어떻게 하시겠습니까?"
+  text_deal_category_reassign_to: 거래를 이 분류로 다시 연결
+  text_deals_destroy_confirmation: "선택한 거래를 정말 삭제하시겠습니까?"
+  label_crm_deal_status_plural: 거래 상태
+  label_crm_deal_status: 거래 상태
+  field_deal_status_is_closed: 닫힘
+  label_crm_deal_status_new: 새 상태
+  permission_manage_contacts: 연락처 관리
+  label_crm_sales_funnel: 영업 퍼널
+  label_crm_period: 기간
+  label_crm_count: 개수
+
+  #2.0.1
+  label_crm_user_format: 연락처 이름 표시 형식
+  label_crm_my_contact_plural: 내가 담당한 연락처
+  label_crm_my_deal_plural: 내가 담당한 미완료 거래
+  label_crm_contact_view_all: 모든 연락처 보기
+  label_crm_deal_view_all: 모든 거래 보기
+
+  #2.0.2
+  label_crm_bulk_edit_selected_contacts: 선택한 연락처 일괄 편집
+  label_crm_bulk_edit_selected_deals: 선택한 거래 일괄 편집
+  label_crm_bulk_send_mail_selected_contacts: 선택한 연락처에 메일 보내기
+  field_add_tags: 태그 추가
+  field_delete_tags: 태그 삭제
+  label_crm_send_mail: 메일 보내기
+  error_empty_email: 이메일을 비워둘 수 없습니다
+  permission_send_contacts_mail: 연락처에 메일 보내기
+  field_mail_from: 보내는 주소
+  text_email_macros: 사용 가능한 매크로 %{macro}
+  field_message: 메시지
+
+  #2.0.3
+  label_crm_add_contact: 연락처 추가
+  label_contact: 연락처
+  field_age: 나이
+  label_crm_vcf_import: vCard에서 가져오기
+  label_crm_mail_from: 보낸 사람
+  permission_import_contacts: 연락처 가져오기
+
+  #2.1.0
+  field_company_name: 회사명
+  label_crm_recently_added_contacts: 최근 추가된 연락처
+  label_crm_created_by_me: 내가 만든 연락처
+  my_contacts: 내 연락처
+  my_deals: 내 거래
+
+  #2.2.0
+  label_crm_note_type_email: 이메일
+  label_crm_note_type_call: 통화
+  label_crm_note_type_meeting: 미팅
+  field_deal_currency: 통화
+  label_crm_my_contacts_stats: 이 달의 연락처 통계
+  label_crm_contacts_created: 생성된 연락처
+  label_crm_deals_created: 생성된 거래
+  my_contacts_avatars: 내 연락처 사진
+  my_contacts_stats: 연락처 통계
+  label_crm_add_into: 추가
+  label_crm_delete_from: 삭제
+  label_crm_show_deaks_tab: 거래 탭 표시
+  label_crm_show_on_projects_show: 프로젝트 개요에 연락처 표시
+
+  #2.2.1
+  label_crm_contacts_show_in_list: 목록에 표시
+
+  #2.3.0
+  label_crm_module_plural: 모듈
+  label_crm_list_partial_style: 목록 스타일
+  label_crm_list_excerpt: 요약 목록
+  label_crm_list_cards: 카드
+  label_crm_list_list: 표
+  field_contacts: 연락처
+  field_companies: 회사
+  label_crm_added_by: 추가한 사람
+  label_crm_contact_note_authoring_time: 노트 작성 시간 표시
+  label_crm_contact_issues_filters: 이슈 필터
+  label_crm_csv_import: CSV에서 가져오기
+  label_crm_upload_encoding: 파일 인코딩
+  label_crm_csv_file: CSV 파일
+  label_crm_csv_separator: 구분자
+  field_middle_name: 가운데 이름
+  field_job_title: 직책
+  field_company: 회사
+  field_address: 주소
+  field_phone: 전화번호
+  field_email: 이메일
+  field_tags: 태그
+  field_last_note: 최근 노트
+  field_is_company: 회사 여부
+  field_contact_full_name: 전체 이름
+  button_contacts_edit_query: 쿼리 편집
+  button_contacts_delete_query: 쿼리 삭제
+  permission_manage_public_contacts_queries: 공개 연락처 쿼리 관리
+  permission_add_deals: 거래 추가
+  permission_add_contacts: 연락처 추가
+  permission_save_contacts_queries: 연락처 쿼리 저장
+
+  #2.3.3
+  label_crm_contact_show_in_app_menu: 앱 메뉴에 탭 표시
+
+  #2.3.4
+  label_crm_contact_show_closed_issues: 닫힌 이슈 표시
+
+  #3.0.0
+  label_crm_import: 가져오기
+  label_contact_note_plural: 연락처 노트
+  label_deal_note_plural: 거래 노트
+  label_crm_contact_all_note_plural: 모든 노트
+  error_unable_delete_deal_status: 거래 상태를 삭제할 수 없습니다
+  label_crm_contacts_hidden: 숨김 설정
+
+  #3.1.0
+  label_crm_contact_added: 연락처가 추가되었습니다
+  label_crm_note_added: 연락처 노트가 추가되었습니다
+  label_crm_deal_added: 거래가 추가되었습니다
+  label_crm_deal_updated: 거래가 수정되었습니다
+  text_crm_contact_added: "%{author}님이 연락처 %{name}을(를) 추가했습니다."
+  text_crm_deal_added: "%{author}님이 거래 %{name}을(를) 추가했습니다."
+  text_crm_deal_status_changed: "거래 상태가 %{old}에서 %{new}(으)로 변경되었습니다"
+  text_crm_deal_updated: "%{author}님이 거래 %{name}을(를) 수정했습니다."
+  label_crm_contacts_cc: 참조(CC)
+  label_crm_contacts_bcc: 숨은참조(BCC)
+  label_crm_contact_import: CSV에서 연락처 가져오기
+  permission_import_deals: 거래 가져오기
+  label_crm_single_quotes: "외따옴표 (')"
+  label_crm_double_quotes: '큰따옴표 (")'
+  label_crm_quotes_type: 따옴표 유형
+  label_crm_contacts_visibility: 표시 범위
+  label_crm_contacts_visibility_project: 프로젝트 권한에 따름
+  label_crm_contacts_visibility_public: 공개
+  label_crm_contacts_visibility_private: 비공개
+  permission_view_private_contacts: 비공개 연락처 보기
+  text_crm_error_on_line: "%{line}줄에서 오류: %{error}"
+
+  #3.2.0
+  label_crm_probability: 확률
+  label_crm_deal_status_type: 상태 유형
+  label_crm_select_companies: 거래에서 회사 필터링
+  label_crm_expected_revenue: 예상 수익
+  label_crm_deal_due_date: 마감일
+
+  #3.2.2
+  label_crm_show_deals_in_top_menu: 상단 메뉴에 거래 표시
+  label_crm_show_details: 상세 정보 표시
+  label_crm_has_deals: 거래 있음
+  label_crm_has_open_issues: 열려 있는 이슈
+  label_crm_note: 노트
+
+  #3.2.5
+  notice_failed_to_save_contacts: "선택된 %{total}개 중 %{count}개의 연락처를 저장하지 못했습니다: %{ids}"
+
+  #3.2.6
+  project_module_deals: 거래
+  permission_manage_deals: 거래 관리
+  label_crm_deals_from_subprojects: 하위 프로젝트의 거래 표시
+  label_crm_megre_tags: 태그 병합
+  label_crm_monochrome_tags: 단색 태그
+
+  #3.2.7
+  label_crm_address: 주소
+  label_crm_street1: 주소 1
+  label_crm_street2: 주소 2
+  label_crm_city: 도시
+  label_crm_region: 주/도
+  label_crm_postcode: 우편번호
+  label_crm_country: 국가
+  label_crm_country_code: 국가 코드
+  label_crm_countries:
+    AE: 아랍에미리트
+    AD: 안도라
+    AF: 아프가니스탄
+    AG: 안티구아 바부다
+    AI: 앵귈라
+    AL: 알바니아
+    AM: 아르메니아
+    AN: 네덜란드령 안틸레스
+    AO: 앙골라
+    AQ: 남극
+    AR: 아르헨티나
+    AS: 미국령 사모아
+    AT: 오스트리아
+    AU: 호주
+    AW: 아루바
+    AX: 올란드 제도
+    AZ: 아제르바이잔
+    BA: 보스니아 헤르체고비나
+    BB: 바베이도스
+    BD: 방글라데시
+    BE: 벨기에
+    BF: 부르키나파소
+    BG: 불가리아
+    BH: 바레인
+    BI: 부룬디
+    BJ: 베냉
+    BL: 생바르텔레미
+    BM: 버뮤다
+    BN: 브루나이
+    BO: 볼리비아
+    BQ: 영국령 남극 지역
+    BR: 브라질
+    BS: 바하마
+    BT: 부탄
+    BV: 부베 섬
+    BW: 보츠와나
+    BY: 벨라루스
+    BZ: 벨리즈
+    CA: 캐나다
+    CC: 코코스 제도
+    CD: 콩고민주공화국
+    CF: 중앙아프리카공화국
+    CG: 콩고공화국
+    CH: 스위스
+    CI: 코트디부아르
+    CK: 쿡 제도
+    CL: 칠레
+    CM: 카메룬
+    CN: 중국
+    CO: 콜롬비아
+    CR: 코스타리카
+    CS: 세르비아 및 몬테네그로
+    CU: 쿠바
+    CV: 카보베르데
+    CW: 퀴라소
+    CX: 크리스마스섬
+    CY: 키프로스
+    CZ: 체코
+    DE: 독일
+    DJ: 지부티
+    DK: 덴마크
+    DM: 도미니카 연방
+    DO: 도미니카공화국
+    DZ: 알제리
+    EC: 에콰도르
+    EE: 에스토니아
+    EG: 이집트
+    EH: 서사하라
+    ER: 에리트레아
+    ES: 스페인
+    ET: 에티오피아
+    FI: 핀란드
+    FJ: 피지
+    FK: 포클랜드 제도
+    FM: 미크로네시아
+    FO: 페로 제도
+    FQ: 프랑스령 남부와 남극 지역
+    FR: 프랑스
+    FX: 프랑스 본토
+    GA: 가봉
+    GB: 영국
+    GD: 그레나다
+    GE: 조지아
+    GF: 프랑스령 기아나
+    GG: 건지
+    GH: 가나
+    GI: 지브롤터
+    GL: 그린란드
+    GM: 감비아
+    GN: 기니
+    GP: 과들루프
+    GQ: 적도 기니
+    GR: 그리스
+    GS: 사우스조지아 사우스샌드위치 제도
+    GT: 과테말라
+    GU: 괌
+    GW: 기니비사우
+    GY: 가이아나
+    HK: 홍콩
+    HM: 허드섬과 맥도널드제도
+    HN: 온두라스
+    HR: 크로아티아
+    HT: 아이티
+    HU: 헝가리
+    ID: 인도네시아
+    IE: 아일랜드
+    IL: 이스라엘
+    IM: 맨섬
+    IN: 인도
+    IO: 영국령 인도양 지역
+    IQ: 이라크
+    IR: 이란
+    IS: 아이슬란드
+    IT: 이탈리아
+    JE: 저지
+    JM: 자메이카
+    JO: 요르단
+    JP: 일본
+    KE: 케냐
+    KG: 키르기스스탄
+    KH: 캄보디아
+    KI: 키리바시
+    KM: 코모로
+    KN: 세인트키츠네비스
+    KP: 북한
+    KR: 대한민국
+    KW: 쿠웨이트
+    KY: 케이맨 제도
+    KZ: 카자흐스탄
+    LA: 라오스
+    LB: 레바논
+    LC: 세인트루시아
+    LI: 리히텐슈타인
+    LK: 스리랑카
+    LR: 라이베리아
+    LS: 레소토
+    LT: 리투아니아
+    LU: 룩셈부르크
+    LV: 라트비아
+    LY: 리비아
+    MA: 모로코
+    MC: 모나코
+    MD: 몰도바
+    ME: 몬테네그로
+    MF: 생마르탱
+    MG: 마다가스카르
+    MH: 마셜 제도
+    MK: 마케도니아
+    ML: 말리
+    MM: 미얀마
+    MN: 몽골
+    MO: 마카오
+    MP: 북마리아나 제도
+    MQ: 마르티니크
+    MR: 모리타니
+    MS: 몬트세랫
+    MT: 몰타
+    MU: 모리셔스
+    MV: 몰디브
+    MW: 말라위
+    MX: 멕시코
+    MY: 말레이시아
+    MZ: 모잠비크
+    NA: 나미비아
+    NC: 뉴칼레도니아
+    NE: 니제르
+    NF: 노퍽섬
+    NG: 나이지리아
+    NI: 니카라과
+    NL: 네덜란드
+    "NO": 노르웨이
+    NP: 네팔
+    NR: 나우루
+    NT: 중립 지대
+    NU: 니우에
+    NZ: 뉴질랜드
+    OM: 오만
+    PA: 파나마
+    PE: 페루
+    PF: 프랑스령 폴리네시아
+    PG: 파푸아뉴기니
+    PH: 필리핀
+    PK: 파키스탄
+    PL: 폴란드
+    PM: 생피에르 미클롱
+    PN: 핏케언 제도
+    PR: 푸에르토리코
+    PS: 팔레스타인 자치구
+    PT: 포르투갈
+    PU: 미국령 기타 태평양 제도
+    PW: 팔라우
+    PY: 파라과이
+    QA: 카타르
+    RE: 레위니옹
+    RO: 루마니아
+    RS: 세르비아
+    RU: 러시아
+    RW: 르완다
+    SA: 사우디아라비아
+    SB: 솔로몬 제도
+    SC: 세이셸
+    SD: 수단
+    SE: 스웨덴
+    SG: 싱가포르
+    SH: 세인트헬레나
+    SI: 슬로베니아
+    SJ: 스발바르 얀마옌
+    SK: 슬로바키아
+    SL: 시에라리온
+    SM: 산마리노
+    SN: 세네갈
+    SO: 소말리아
+    SR: 수리남
+    SS: 남수단
+    ST: 상투메 프린시페
+    SU: 소련
+    SV: 엘살바도르
+    SX: 신트마르턴
+    SY: 시리아
+    SZ: 에스와티니
+    TC: 터크스 케이커스 제도
+    TD: 차드
+    TF: 프랑스령 남부 지역
+    TG: 토고
+    TH: 태국
+    TJ: 타지키스탄
+    TK: 토켈라우
+    TL: 동티모르
+    TM: 투르크메니스탄
+    TN: 튀니지
+    TO: 통가
+    TR: 튀르키예
+    TT: 트리니다드토바고
+    TV: 투발루
+    TW: 대만
+    TZ: 탄자니아
+    UA: 우크라이나
+    UG: 우간다
+    UM: 미국령 군소 제도
+    US: 미국
+    UY: 우루과이
+    UZ: 우즈베키스탄
+    VA: 바티칸 시국
+    VC: 세인트빈센트그레나딘
+    VD: 북베트남
+    VE: 베네수엘라
+    VG: 영국령 버진아일랜드
+    VI: 미국령 버진아일랜드
+    VN: 베트남
+    VU: 바누아투
+    WF: 월리스 푸투나
+    WK: 웨이크섬
+    WS: 사모아
+    YD: 예멘 인민민주공화국
+    YE: 예멘
+    YT: 마요트
+    ZA: 남아프리카공화국
+    ZM: 잠비아
+    ZW: 짐바브웨
+    ZZ: 알 수 없거나 잘못된 지역
+
+  label_crm_cross_project_contacts: 프로젝트 간 연락처 연결 허용
+  label_crm_list_board: 보드
+  label_crm_default_list_style: 기본 목록 스타일
+  label_crm_show_in_top_menu: 상단 메뉴에 표시
+  label_crm_show_in_app_menu: 앱 메뉴에 표시
+  label_crm_money_settings: 금액 설정
+  label_crm_disable_taxes: 세금 비활성화
+  label_crm_default_tax: 기본 세율
+  label_crm_tax_type: 세금 유형
+  label_crm_tax_type_inclusive: 세금 포함
+  label_crm_tax_type_exclusive: 세금 별도
+  label_crm_default_currency: 기본 통화
+  label_crm_thousands_delimiter: 천 단위 구분기호
+  label_crm_decimal_separator: 소수점 구분기호
+
+  #3.2.10
+  label_crm_add_contact_plural: 연락처 추가
+  label_crm_search_for_contact: 연락처 검색
+  label_crm_major_currencies: 주요 통화
+
+  #3.2.11
+  label_crm_post_address_format: 우편 주소 형식
+  label_crm_post_address_format_macros: "주소 형식 매크로: %{macros}"
+
+  #3.2.14
+  label_crm_last_year: 작년
+
+  #3.2.15
+  permission_export_contacts: 연락처와 거래 내보내기
+
+  #3.4.0
+  label_crm_deal_contact: 거래의 연락처
+
+  #3.4.1
+  label_crm_default_country: 기본 국가
+  label_attribute_of_contact: "연락처의 %{name}"
+  label_crm_contact_country: 연락처 국가
+  label_crm_contact_city: 연락처 도시
+  label_attribute_of_deals: "거래의 %{name}"
+
+  #3.4.2
+  permission_manage_public_deals_queries: 공개 거래 쿼리 관리
+  permission_save_deals_queries: 거래 쿼리 저장
+  permission_manage_contact_issue_relations: 이슈-연락처 관계 관리
+
+  #3.4.4
+  label_crm_pipeline: 파이프라인
+  text_crm_no_deal_statuses_in_project: 이 프로젝트에는 거래 상태가 없습니다
+
+  #3.4.6
+  label_crm_contact_email: 연락처 이메일
+  label_crm_light_free_version: CRM 라이트 무료 버전
+  label_crm_link_to_pro: PRO로 업그레이드
+  label_crm_link_to_pro_demo: PRO 버전 데모 보기
+  label_crm_link_to_more_plugins: 더 많은 RedmineUP 플러그인 보기
+
+  text_crm_string_incorrect_format: 형식이 올바르지 않습니다
+  label_deal_items: 거래 품목
+  button_duplicate: 복제
+
+  label_crm_deal_linked_deal_error: 거래끼리는 연결할 수 없습니다
+
+  label_crm_related_issues: 관련 이슈
+
+  mail_subject_deal_reminder: "%{days}일 이내 마감되는 거래 %{count}건"
+  mail_body_deal_reminder: "%{days}일 안에 마감되는 당신에게 할당된 거래 %{count}건이 있습니다:"
+
+  label_deal_watchers: 구독자
+  label_deal_statuses_helper: 거래 상태 추가
+  label_import_contacts: 연락처 가져오기
+
+  #4.4.2
+  permission_delete_deal_watchers: 거래 구독자 삭제
+  permission_view_deal_watchers: 거래 구독자 보기
+
+  label_address: 주소

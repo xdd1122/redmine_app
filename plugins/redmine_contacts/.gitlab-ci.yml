@@ -1,0 +1,132 @@
+default:
+  image: registry.redminecrm.com/docker/redmine_contacts
+  before_script:
+    - echo "Preparing..."
+    - service postgresql start && service mysql start && sleep 5
+    - export PATH=~/.rbenv/shims:$PATH
+    - export CODEPATH=`pwd`
+
+variables:
+  PLUGIN: redmine_contacts
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+
+.build_data:
+  script:
+    - /root/run_for.sh $PLUGIN+$LICENSE ruby-$RUBY_VERSION $DB redmine-$REDMINE $DEPENDENTS
+  coverage: '/\d+(?:\.\d+)?%/'
+
+prepare:
+  stage: build
+  script:
+    - echo "Preparing to tests ..."
+
+coverage:
+  stage: build
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "3.4.3"
+    LICENSE: "pro"
+    DB: "mysql"
+    REDMINE: "trunk"
+    DEPENDENTS: "redmine_products+pro"
+  script:
+    - export FOR_COVERAGE=1
+    - /root/run_for.sh $PLUGIN+$LICENSE ruby-$RUBY_VERSION $DB redmine-$REDMINE $DEPENDENTS
+    - mv /var/www/ruby-$RUBY_VERSION/$DB/redmine-$REDMINE/coverage $CI_BUILDS_DIR/$CI_PROJECT_PATH
+    - mv /var/www/ruby-$RUBY_VERSION/$DB/redmine-$REDMINE/log/test.log $CI_BUILDS_DIR/$CI_PROJECT_PATH
+    - sed -i -e "s~/var/www/ruby-$RUBY_VERSION/$DB/redmine-$REDMINE~$CI_BUILDS_DIR/$CI_PROJECT_PATH/~g" ./coverage/coverage.xml
+    - sed -ie "s~filename=\"$CI_PROJECT_PATH/~filename=\"~g" ./coverage/coverage.xml
+  coverage: '/\d+(?:\.\d+)?%/'
+  artifacts:
+    paths:
+      - test.log
+    expire_in: 1 week
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/coverage.xml
+
+3.4.3-pro-mysql-trunk:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "3.4.3"
+    LICENSE: "pro"
+    DB: "mysql"
+    REDMINE: "trunk"
+    DEPENDENTS: ""
+  extends: .build_data
+
+3.3.8-pro-mysql-6.0:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "3.3.8"
+    LICENSE: "pro"
+    DB: "mysql"
+    REDMINE: "6.0"
+    DEPENDENTS: ""
+  extends: .build_data
+
+3.2.2-pro-mysql-5.1:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "3.2.2"
+    LICENSE: "pro"
+    DB: "mysql"
+    REDMINE: "5.1"
+    DEPENDENTS: ""
+  extends: .build_data
+
+3.2.2-light-mysql-5.1:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "3.2.2"
+    LICENSE: "light"
+    DB: "mysql"
+    REDMINE: "5.1"
+    DEPENDENTS: ""
+  extends: .build_data
+
+2.7.8-pro-pg-4.2:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "2.7.8"
+    LICENSE: "pro"
+    DB: "pg"
+    REDMINE: "4.2"
+    DEPENDENTS: ""
+  extends: .build_data
+
+2.7.8-light-mysql-4.2:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "2.7.8"
+    LICENSE: "light"
+    DB: "mysql"
+    REDMINE: "4.2"
+    DEPENDENTS: ""
+  extends: .build_data
+
+2.3.8-pro-mysql-4.0-redmine_products+pro:
+  stage: test
+  needs: [prepare]
+  variables:
+    RUBY_VERSION: "2.3.8"
+    LICENSE: "pro"
+    DB: "mysql"
+    REDMINE: "4.0"
+    DEPENDENTS: "redmine_products+pro"
+  extends: .build_data
+
+after-all:
+  needs: [coverage]
+  stage: deploy
+  script:
+    - echo "After actions ..."

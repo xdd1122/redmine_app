@@ -1,0 +1,39 @@
+<div class="contact card">
+  <div class="subject_header">
+    <div class="avatar">
+      <%= contact_tag(contact_card, type: "avatar", size: 32) %>
+    </div>
+    <div class="name">
+      <div class="header"><%= contact_tag(contact_card, type: "plain") %></div>
+      <div class="job_title">
+        <%= h contact_card.job_title %>
+        <% unless contact_card.is_company %>
+          <%= " #{l(:label_crm_at_company)} " unless (contact_card.job_title.blank? or contact_card.company.blank?) %>
+          <% if contact_card.contact_company %>
+            <%= link_to contact_card.contact_company.name, { controller: 'contacts', action: 'show', project_id: contact_card.contact_company.project(@project), id: contact_card.contact_company.id } %>
+          <% else %>
+            <%= h contact_card.company %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-details">
+    <% if contact_card.phones.any? %>
+      <p class="phone icon icon-phone">
+        <%= sprite_icon('phone', plugin: :redmine_contacts) %>
+        <span class="icon-label"><%= contact_card.phones.first %></span>
+      </p>
+    <% end %>
+
+    <% if contact_card.emails.any? %>
+      <p class="email icon icon-email">
+        <%= sprite_icon('email') %>
+        <span class="icon-label"><%= mail_to contact_card.emails.first %></span>
+      </p>
+    <% end %>
+
+    <%= tag_links(contact_card.tag_list) %>
+  </div>
+</div>
