@@ -5,12 +5,43 @@ This project allows you to deploy a secure, production-ready Redmine application
 The **Development approach**: We build the entire application (including plugins and dependencies) via **GitHub Actions**, which automatically pushes the Docker image to the server. This ensures "Immutable Infrastructure"—the server runs exactly what you tested locally.
 
 There are two ways of setting up the environment:
+
 1. **[The AWS - Cloud hosted way](#aws-setup)**
 2. **[Locally via Multipass](#local-setup)**
 
 ---
 
+## 📁 Project Structure
+
+```bash
+.
+└── redmine_app/
+   ├── .github/workflows/
+   │   └── deploy.yml ⬅ The CI/CD Pipeline script for image building and deployment
+   ├── backup/
+   │   ├── Dockerfile ⬅ Builds a lightweight image that runs the db backup script
+   │   └── script.sh ⬅ Dumps the Postgre DB to an AWS S3 Bucket
+   ├── config/
+   │   ├── configuration.yml ⬅ Redmine core config file
+   │   └── database.yml ⬅ DB Connection and authentication for Redmine
+   ├── plugins/ ⬅ Plguins for Redmine
+   │   ├── redmine_agile
+   │   ├── redmine_checklists
+   │   ├── redmine_contacts
+   │   └── redmine_sla
+   ├── .gitignore
+   ├── Dockerfile ⬅ Builds a custom Redmine image, including the plugins and Ruby dependencies
+   ├── README.md
+   ├── cloud-init.yaml
+   ├── docker-compose.yml
+   ├── docker-entrypoint.sh ⬅ Custom startup script for Redmine that ensure DB migrations before booting
+   └── main.tf
+```
+
+---
+
 ## 🛠️ Step 0: Prerequisites
+
 1.  **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**: Required to build the application image.
 2.  **[Terraform](https://developer.hashicorp.com/terraform/downloads)**: Required to create the server on AWS automatically.
 3.  **[AWS CLI](https://aws.amazon.com/cli/)**: Required to connect your computer to your AWS account.
@@ -26,21 +57,22 @@ Terraform needs permission to create servers in your AWS account.
 
 1.  **Create an AWS Account:** If you don't have one, sign up at [aws.amazon.com](https://aws.amazon.com).
 2.  **Create Access Keys:**
-    * Go to the **IAM Dashboard** in the AWS Console.
-    * Click **Users** > **Create User** (name it `terraform-user`).
-    * Attach policies: Select **AdministratorAccess**.
-    * Once created, go to the user's **Security Credentials** tab.
-    * Click **Create Access Key**.
-    * **SAVE the Access Key ID and Secret Access Key.**
+    - Go to the **IAM Dashboard** in the AWS Console.
+    - Click **Users** > **Create User** (name it `terraform-user`).
+    - Attach policies: Select **AdministratorAccess**.
+    - Once created, go to the user's **Security Credentials** tab.
+    - Click **Create Access Key**.
+    - **SAVE the Access Key ID and Secret Access Key.**
 3.  **Configure your Computer:**
     Open your terminal and run:
     ```bash
     aws configure
     ```
-    * **AWS Access Key ID:** Paste your key.
-    * **AWS Secret Access Key:** Paste your secret.
-    * **Default region name:** `us-east-1` (or your preferred region).
-    * **Default output format:** `json`
+
+    - **AWS Access Key ID:** Paste your key.
+    - **AWS Secret Access Key:** Paste your secret.
+    - **Default region name:** `us-east-1` (or your preferred region).
+    - **Default output format:** `json`
 
 ---
 
@@ -60,6 +92,7 @@ Needed for secure remote connection to the server.
 ## ⚙️ Step 3: Project Setup
 
 1.  **Clone this repository:**
+
     ```bash
     git clone https://github.com/xdd1122/redmine_app.git
     cd redmine_app
@@ -95,14 +128,17 @@ Needed for secure remote connection to the server.
 ---
 
 ## 🏗️ Step 4: Deploy Infrastructure (Terraform)
-*Only run this once to create the server.*
+
+_Only run this once to create the server._
 
 1.  **Initialize & Apply:**
+
     ```bash
     terraform init
     terraform apply
     ```
-    *(Type `yes` when asked)*
+
+    _(Type `yes` when asked)_
 
 2.  **Get the IP:**
     Terraform will output the server IP. You will need this for the next step.
@@ -114,13 +150,13 @@ Needed for secure remote connection to the server.
 For the CI/CD pipeline to work, you must add these secrets to your GitHub Repository.
 Go to **Settings** > **Secrets and variables** > **Actions** and add:
 
-| Secret Name | Value |
-| :--- | :--- |
-| `DOCKER_USERNAME` | Your Docker Hub Username |
-| `DOCKER_TOKEN` | Your Docker Hub Access Token |
-| `SSH_HOST` | The AWS IP Address from Step 4 |
-| `SSH_USER` | `ubuntu` |
-| `SSH_KEY` | Content of your `~/.ssh/id_rsa` file |
+| Secret Name       | Value                                |
+| :---------------- | :----------------------------------- |
+| `DOCKER_USERNAME` | Your Docker Hub Username             |
+| `DOCKER_TOKEN`    | Your Docker Hub Access Token         |
+| `SSH_HOST`        | The AWS IP Address from Step 4       |
+| `SSH_USER`        | `ubuntu`                             |
+| `SSH_KEY`         | Content of your `~/.ssh/id_rsa` file |
 
 ---
 
@@ -129,15 +165,17 @@ Go to **Settings** > **Secrets and variables** > **Actions** and add:
 This project uses **GitHub Actions** for a fully automated DevOps pipeline. You do not need to manually build or copy Docker images.
 
 ### How it works:
+
 1.  **Continuous Integration (CI):** When you push code to the `main` branch, GitHub Actions automatically builds the Docker image and pushes it to Docker Hub.
 2.  **Continuous Deployment (CD):** After a successful build, the pipeline logs into the AWS server via SSH, pulls the new image, and restarts the application with zero downtime.
 
 ### 🔄 How to Update the App
+
 1.  Make changes to your code locally.
 2.  Commit and push:
     ```bash
     git add .
-    git commit -m "Added a cool new feature"
+    git commit -m "Added a new feature"
     git push origin main
     ```
 3.  Wait ~3 minutes, and the changes will be live on your server.
@@ -148,8 +186,8 @@ This project uses **GitHub Actions** for a fully automated DevOps pipeline. You 
 
 1.  Copy the `app_url` from the Terraform output and paste it into your browser.
 2.  **Default Login:**
-    * **User:** `admin`
-    * **Password:** `admin`
+    - **User:** `admin`
+    - **Password:** `admin`
 
 ---
 
@@ -170,10 +208,12 @@ terraform destroy
 If you don't want to use AWS, or just want to test your configuration for free, you can simulate the **environment** locally using [Multipass](https://multipass.run/). This creates an Ubuntu VM on your computer that acts just like the AWS server.
 
 ### 1. Install Multipass
-* **MacOS/Windows:** Download the installer from [multipass.run](https://multipass.run/).
-* **Linux:** `sudo snap install multipass`
+
+- **MacOS/Windows:** Download the installer from [multipass.run](https://multipass.run/).
+- **Linux:** `sudo snap install multipass`
 
 ### 2. Prepare the Cloud-Init
+
 The `cloud-init.yaml` file is designed for Terraform (which injects your SSH key). For local use, create a copy that is safe for Multipass:
 
 ```bash
@@ -181,10 +221,12 @@ The `cloud-init.yaml` file is designed for Terraform (which injects your SSH key
 cp cloud-init.yaml cloud-init-local.yaml
 ```
 
-### 3. Edit *cloud-init-local.yaml*
-Open the file and remove the *ssh_authorized_keys* section, as Multipass handles keys differently.
+### 3. Edit _cloud-init-local.yaml_
+
+Open the file and remove the _ssh_authorized_keys_ section, as Multipass handles keys differently.
 
 ### 4. Launch the VM
+
 ```bash
 # This installs Docker and sets up permissions automatically
 multipass launch jammy --name redmine-local --cpus 2 --mem 2G --disk 10G --cloud-init cloud-init-local.yaml
@@ -194,13 +236,17 @@ multipass info redmine-local
 ```
 
 ### 5. Access Redmine
+
 Find the IP of the VM
+
 ```bash
 multipass list
 ```
-* Copy the IP and open http://IPofVM:3000 in your browser
+
+- Copy the IP and open http://IPofVM:3000 in your browser
 
 ### 6. Cleanup
+
 ```bash
 multipass delete redmine-local
 multipass purge
