@@ -27,11 +27,13 @@ Detailed description of the components of aligning to ITIL management practices:
 * It calculates SLA compliance directly at the PostgreSQL database level using PL/pgSQL. It pauses SLA timers based on customized business working hours, weekends, and corporate holidays.
 
 ![SLA Tracking Configuration](./images/sla.png)
+*1. Shows SLA Plugin's time tracking per issue feature.*
 
 ### 3. Relationship Management (CRM Plugin)
 * Handled by the `Redmine CRM` plugin provided by RedmineUP. It can link IT incidents to specific users, departments, or external companies. Support agents can be configured and they can view a client's entire ticket history and identify recurring issues tied to specific departments, rather than treating every ticket in a vacuum.
 
 ![Redmine CRM Directory](./images/crm.png)
+*2. Shows the CRM Plugin's contact feature, where employees can reach them.*
 
 ### 4. Measurement & Continual Improvement (Metabase)
 * `Metabase` handled the Metrics and analysis. It runs alongside Redmine and connects directly to its underlying PostgreSQL database.
@@ -40,13 +42,17 @@ Detailed description of the components of aligning to ITIL management practices:
   * **Applications:** Track SLA breach rates, measure average resolution times per agent, visualize ticket volume by department, or build a "Live NOC" screen for the IT team.
 
 ![Metabase Data Dashboards](./images/metabase.png)
+*3. Shows Metabase's dashboard, built with custom queries, showing just a few usecases of metric reporting.*
 
 ### 5. Kanban board, Problem & Change Management (Agile & Checklists Plugins)
 * The `Agile` (by RedmineUP) and `Checklists` plugin deal with interactive issue management. The `redmine_agile` plugin provides Kanban boards to help engineering teams track long-term root-cause fixes. The `redmine_checklists` plugin ensures that standard operating procedures (SOPs) are strictly followed during complex system changes or post-mortem reviews.
 
 ![Agile Kanban Boards](./images/agile.png)
+*4. Shows the Kanban board provided by the Agile Plugin.*
+
 
 ![Change Management Checklists](./images/checklists.png)
+*5. Shows the Checklist Plugin's feature implemented on an issue*
 
 ---
 ## 📁 Project Structure
