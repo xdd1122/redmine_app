@@ -11,6 +11,44 @@ There are two ways of setting up the environment:
 
 ---
 
+## 🏢 ITIL Capabilities
+
+This stack aims beyond basic issue tracking. By combining Redmine with specific enterprise plugins and a metrics engine, this infrastructure serves as a fully capable **IT Service Management** platform aligned with **ITIL** best practices.
+
+
+
+Detailed description of the components of aligning to ITIL management practices:
+
+### 1. Incident & Service Request Management (Redmine Core)
+* This is handled by Redmine's base service, since its ticketing system handles the intake, prioritization, and assignment of issues. Custom workflows regulate the lifecycle of a ticket (e.g., *New → Work In Progress → Done*).
+
+### 2. Service Level Management (SLA Plugin)
+* Handled by the `redmine_sla` plugin by LikeHopper, a commonly used free alternative to RedmineUp's helpdesk plugin. It enforces Service Level Aggreements and tracks both "Time to First Response" and "Time to Resolution", all timeframes are customizable.
+* It calculates SLA compliance directly at the PostgreSQL database level using PL/pgSQL. It pauses SLA timers based on customized business working hours, weekends, and corporate holidays.
+
+![SLA Tracking Configuration](./images/sla.png)
+
+### 3. Relationship Management (CRM Plugin)
+* Handled by the `Redmine CRM` plugin provided by RedmineUP. It can link IT incidents to specific users, departments, or external companies. Support agents can be configured and they can view a client's entire ticket history and identify recurring issues tied to specific departments, rather than treating every ticket in a vacuum.
+
+![Redmine CRM Directory](./images/crm.png)
+
+### 4. Measurement & Continual Improvement (Metabase)
+* `Metabase` handled the Metrics and analysis. It runs alongside Redmine and connects directly to its underlying PostgreSQL database.
+* **Features:** 
+  * **Metrics:** Since it has direct read-access to the database, you are not limited to Redmine's built-in reports. You can write custom SQL queries to build live, auto-refreshing dashboards. The potential is limited only by the users imagination.
+  * **Applications:** Track SLA breach rates, measure average resolution times per agent, visualize ticket volume by department, or build a "Live NOC" screen for the IT team.
+
+![Metabase Data Dashboards](./images/metabase.png)
+
+### 5. Kanban board, Problem & Change Management (Agile & Checklists Plugins)
+* The `Agile` (by RedmineUP) and `Checklists` plugin deal with interactive issue management. The `redmine_agile` plugin provides Kanban boards to help engineering teams track long-term root-cause fixes. The `redmine_checklists` plugin ensures that standard operating procedures (SOPs) are strictly followed during complex system changes or post-mortem reviews.
+
+![Agile Kanban Boards](./images/agile.png)
+
+![Change Management Checklists](./images/checklists.png)
+
+---
 ## 📁 Project Structure
 
 ```bash
